@@ -11,6 +11,10 @@ E-Mail : corleone@kakao.com
 Version : 1.0.0
 Keyword : 'PDF', 'Table', 'Camelot' ,'PDF Extract', 'PYPDF', 'pdf2jpg'
 
+* If you get Error message like 'utf-8' encoding~
+    you should update pdf2jpg library.
+    > You can see variable named 'output' in 'pdf2jpg' library
+    > You must decode that : output = output.decode() ==> output = output.decode("cp949")
 * This Project used Excalibur Library
 """
 
@@ -236,7 +240,8 @@ def save_images(source):
     for it in tqdm(pdfs):
         if "crop" not in it: #PDF 파일명에 crop이 존재하지 않으면 > 기존 pdf file
             continue
-        else: print("Convert jpg >>",it) # crop tablle pdf file
+        else: print("\nConvert jpg >>",it) # crop tablle pdf file
+        print(pdf2jpg.convert_pdf2jpg(it, source, dpi=300, pages='ALL')[0])
         render = pdf2jpg.convert_pdf2jpg(it, source, dpi=300, pages='ALL')[0] #JPG로 변환
         time.sleep(0.2) # JPG 변환을 위해 대기
         
