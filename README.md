@@ -2,11 +2,11 @@
 *Extract table from PDF document, Crop and Convert to JPG file
 
 
-**Table Extract from PDF Document
+**Table Extract from PDF Document**
 
-**Crop PDF Table
+**Crop PDF Table**
 
-**Convert to JPG File ans Save
+**Convert to JPG File ans Save**
 
 
 >Project Name : PDF Table to JPG
