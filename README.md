@@ -1,5 +1,5 @@
 # PDF_Table_to_JPG
-*Extract table from PDF document, Crop and Convert to JPG file*
+##Extract table from PDF document, Crop and Convert to JPG file##
 
 
 **Table Extract from PDF Document**
@@ -58,15 +58,15 @@ output = output.decode("cp949") 로 바꾸어주면 한글 폴더명이 포함�
 
 
 
-**Example**
+##Example##
 
-Original PDF Document
+*Original PDF Document*
 
 ![git1](https://user-images.githubusercontent.com/25974226/99659903-ed597c80-2aa4-11eb-921d-10cd975db817.PNG)
 
 
 
-Crop Table JPG
+*Crop Table JPG*
 
 ![git2](https://user-images.githubusercontent.com/25974226/99659911-ef234000-2aa4-11eb-9fc7-5bd68ea27cc0.jpg)
 
