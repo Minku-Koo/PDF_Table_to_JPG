@@ -9,17 +9,21 @@
 **Convert to JPG File ans Save**
 
 
->Project Name : PDF Table to JPG
+* Project Name : PDF Table to JPG
 
->Create Date : 19/Nov/2020
+* Create Date : 19/Nov/2020
 
->Author : Minkuk Koo
+* Author : Minkuk Koo
 
->E-Mail : corleone@kakao.com
+* E-Mail : corleone@kakao.com
 
->Version : 1.0.0
+* Version : 1.0.0
 
->Keyword : 'PDF', 'Table', 'Camelot' ,'PDF Extract', 'PYPDF', 'pdf2jpg'
+* Keyword : 'PDF', 'Table', 'Camelot' ,'PDF Extract', 'PYPDF', 'pdf2jpg'
+
+
+---------------------------------------------------------------------------------
+
 
 
 * If you get Error message like 'utf-8' encoding~ ,than 
