@@ -26,16 +26,14 @@
 
 
 
-* If you get Error message like 'utf-8' encoding~ ,than 
+1. If you get Error message like 'utf-8' encoding~ ,than 
     you should update pdf2jpg library.
     
     > You can see variable named 'output' in 'pdf2jpg' library
     
     > You must decode that : output = output.decode() ==> output = output.decode("cp949")
-* This Project used Excalibur Library
+2. This Project used Excalibur Library
 
-
----------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 
 PDF 파일 경로에 한글이 포함되어 있는 경우, 에러가 발생할 수 있습니다.
