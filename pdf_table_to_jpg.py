@@ -236,18 +236,19 @@ def save_images(source):
         os.makedirs(new_folder)
     else: # 존재하지 않으면 폴더 생성
         os.makedirs(new_folder)
-        
+    
+    pdf_name = source.split('/')[-1]
     for it in tqdm(pdfs):
         if "crop" not in it: #PDF 파일명에 crop이 존재하지 않으면 > 기존 pdf file
             continue
         else: print("\nConvert jpg >>",it) # crop tablle pdf file
-        print(pdf2jpg.convert_pdf2jpg(it, source, dpi=300, pages='ALL')[0])
-        render = pdf2jpg.convert_pdf2jpg(it, source, dpi=300, pages='ALL')[0] #JPG로 변환
+        
+        render = pdf2jpg.convert_pdf2jpg(it, source, dpi=300, pages='ALL')[0] #JPG로 변
         time.sleep(0.2) # JPG 변환을 위해 대기
         
         old_folder = "\\".join(render["output_jpgfiles"][0].split("\\")[:-1])
         pdf_file = render["output_jpgfiles"][0].split("\\")[-1]
-        shutil.move(old_folder+"/"+pdf_file ,new_folder+"/"+pdf_file ) #JPG 파일 이동
+        shutil.move(old_folder+"/"+pdf_file ,new_folder+"/"+ pdf_name+"-" +pdf_file.split("_")[1] ) #JPG 파일 이동
         
         shutil.rmtree(render["output_pdfpath"])
 
