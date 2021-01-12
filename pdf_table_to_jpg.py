@@ -6,10 +6,11 @@
 
 Project Name : PDF Table to JPG
 Create Date : 19/Nov/2020
+Update Date : 11/Jan/2021
 Author : Minkuk Koo
 E-Mail : corleone@kakao.com
-Version : 1.0.0
-Keyword : 'PDF', 'Table', 'Camelot' ,'PDF Extract', 'PYPDF', 'pdf2jpg'
+Version : 1.1.0
+Keyword : 'PDF', 'Table', 'Camelot' ,'PDF Extract', 'PyPDF', 'pdf2jpg'
 
 * If you get Error message like 'utf-8' encoding~
     you should update pdf2jpg library.
@@ -173,7 +174,7 @@ def excalibur(filepath, pages): # excalibur 모듈 활용, PDF 각 페이지에�
                 stream_areas = []
                 for table in tables:
                     x1, y1, x2, y2 = table._bbox
-                    stream_areas.append((x1, y2, x2, y1))
+                    stream_areas.append((x1, y1, x2, y2))
     
             temp = tables
     
@@ -190,7 +191,7 @@ def excalibur(filepath, pages): # excalibur 모듈 활용, PDF 각 페이지에�
                 lattice_areas = []
                 for table in tables:
                     x1, y1, x2, y2 = table._bbox
-                    lattice_areas.append((x1, y2, x2, y1))
+                    lattice_areas.append((x1, y1, x2, y2))
                 
         except Exception as e:
             print("\nLattice Error")
@@ -244,7 +245,7 @@ def save_images(source):
         else: print("\nConvert jpg >>",it) # crop tablle pdf file
         
         render = pdf2jpg.convert_pdf2jpg(it, source, dpi=300, pages='ALL')[0] #JPG로 변
-        time.sleep(0.2) # JPG 변환을 위해 대기
+        time.sleep(0.1) # JPG 변환을 위해 대기
         
         old_folder = "\\".join(render["output_jpgfiles"][0].split("\\")[:-1])
         pdf_file = render["output_jpgfiles"][0].split("\\")[-1]
@@ -253,7 +254,7 @@ def save_images(source):
         shutil.rmtree(render["output_pdfpath"])
 
 # Camelot으로 인식한 Table 좌표를 통해 PDF Crop
-def pdf_crop(filepath, x, y, w, h,pdf_num): # 파일 경로, 최초 x, y 값, 가로 세로 길이, PDF 번호
+def pdf_crop(filepath, x1, y1, x2, y2,pdf_num, parser): # 파일 경로, 최초 x, y 값, 가로 세로 길이, PDF 번호, parser method
     with open(filepath,'rb') as fin:
         pdf = PyPDF2.PdfFileReader(fin)
         page = pdf.getPage(0)
@@ -261,16 +262,13 @@ def pdf_crop(filepath, x, y, w, h,pdf_num): # 파일 경로, 최초 x, y 값, �
         # Coordinates found by inspection.
         # Can these coordinates be found automatically?
         
-        # page.cropBox.lowerLeft=(88,322)
-        # page.cropBox.upperRight = (508,602)
+        page.cropBox.upperLeft=(x1,y1)
+        page.cropBox.lowerRight = (x2,y2)
         
-        page.cropBox.lowerLeft=(x,y)
-        page.cropBox.upperRight = (w,h)
-
         output = PyPDF2.PdfFileWriter()
         output.addPage(page)
         name = filepath.split("/")[-1].split(".")[0]
-        path_  = "/".join(filepath.split("/")[:-1])+'/'+name+'-crop-'+str(pdf_num)
+        path_  = "/".join(filepath.split("/")[:-1])+'/'+name+'-crop-'+str(pdf_num)+parser
         with open(path_+'.pdf','wb') as fo:
             output.write(fo) # Crop PDF 저장
         time.sleep(0.1)
@@ -284,19 +282,25 @@ def pdf_crop(filepath, x, y, w, h,pdf_num): # 파일 경로, 최초 x, y 값, �
 if __name__ == '__main__':
     pdf_path = file_path_select() #PDF 파일 지정
     result, detected_areas = excalibur(pdf_path, "all") #해당 PDF에서 추출한 Table
-
+    
     for page in range(len(detected_areas)):
         page_file = os.path.join(
                     os.path.dirname(pdf_path),
                     os.path.basename(pdf_path).split(".")[0],
                     "page-"+str(page+1)+".pdf"
                     ).replace("\\", "/")
-        
         n=1
         folder_path = pdf_path.split(".")[0]
-        for x, y, w, h in detected_areas[page+1]['stream']:
-            pdf_crop(page_file, x, y, w, h, n) #PDF Crop
-            n+=1
+        parser = "stream"
+        if detected_areas[page+1][parser] != None:
+            for x1, y1, x2, y2 in detected_areas[page+1][parser]:
+                pdf_crop(page_file, x1, y1, x2, y2, n, parser) #PDF Crop
+                n+=1
+        parser ="lattice"
+        if detected_areas[page+1][parser] != None:
+            for x1, y1, x2, y2 in detected_areas[page+1][parser]:
+                pdf_crop(page_file, x1, y1, x2, y2, n, parser) #PDF Crop
+                n+=1
             
     select = input("Image Convert Start? [y/n] :") # JPG 변환 여부
     if select.upper()=="Y":
