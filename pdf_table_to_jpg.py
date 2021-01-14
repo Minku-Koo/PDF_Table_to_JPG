@@ -240,11 +240,10 @@ def save_images(source):
     
     pdf_name = source.split('/')[-1]
     for it in tqdm(pdfs):
-        if "crop" not in it: #PDF 파일명에 crop이 존재하지 않으면 > 기존 pdf file
-            continue
+        if "crop" not in it: continue #PDF 파일명에 crop이 존재하지 않으면 > 기존 pdf file
         else: print("\nConvert jpg >>",it) # crop tablle pdf file
         
-        render = pdf2jpg.convert_pdf2jpg(it, source, dpi=300, pages='ALL')[0] #JPG로 변
+        render = pdf2jpg.convert_pdf2jpg(it, source, dpi=400, pages='ALL')[0] #JPG로 변환
         time.sleep(0.1) # JPG 변환을 위해 대기
         
         old_folder = "\\".join(render["output_jpgfiles"][0].split("\\")[:-1])
@@ -268,17 +267,18 @@ def pdf_crop(filepath, x1, y1, x2, y2,pdf_num, parser): # 파일 경로, 최초 
         output = PyPDF2.PdfFileWriter()
         output.addPage(page)
         name = filepath.split("/")[-1].split(".")[0]
-        path_  = "/".join(filepath.split("/")[:-1])+'/'+name+'-crop-'+str(pdf_num)+parser
-        with open(path_+'.pdf','wb') as fo:
-            output.write(fo) # Crop PDF 저장
-        time.sleep(0.1)
+        path_  = "/".join(filepath.split("/")[:-1])+'/'+name+"-"+parser+'-crop-'+str(pdf_num)
+        
+        with open(path_+'.pdf','wb') as f:
+            output.write(f) # Crop PDF 저장
+        
         """
         # 여기서 바로 JPG 변환해도 무방
         # save_images("/".join(filepath.split("/")[:-1]))
         """
     return 0
     
-    
+
 if __name__ == '__main__':
     pdf_path = file_path_select() #PDF 파일 지정
     result, detected_areas = excalibur(pdf_path, "all") #해당 PDF에서 추출한 Table
