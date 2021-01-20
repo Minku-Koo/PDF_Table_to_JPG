@@ -258,9 +258,6 @@ def pdf_crop(filepath, x1, y1, x2, y2,pdf_num, parser): # 파일 경로, 최초 
         pdf = PyPDF2.PdfFileReader(fin)
         page = pdf.getPage(0)
 
-        # Coordinates found by inspection.
-        # Can these coordinates be found automatically?
-        
         page.cropBox.upperLeft=(x1,y1)
         page.cropBox.lowerRight = (x2,y2)
         
