@@ -68,7 +68,7 @@ output = output.decode("cp949") 로 바꾸어주면 한글 폴더명이 포함�
 
 
 
-**Crop Table JPG ()**
+**Crop Table JPG (Stream Method)**
 
 ![git2](https://user-images.githubusercontent.com/25974226/99659911-ef234000-2aa4-11eb-9fc7-5bd68ea27cc0.jpg)
 
