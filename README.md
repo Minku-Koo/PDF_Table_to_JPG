@@ -28,12 +28,11 @@
 
 ***Warning !!***
 
-1. If you get Error message like 'utf-8' encoding~ ,than 
-    you should update pdf2jpg library.
+1. If you get Error message like 'utf-8' encoding~ ,then you should update pdf2jpg library.
     
-    > You can see variable named 'output' in 'pdf2jpg' library
+    * You can see variable named 'output' in 'pdf2jpg' library
     
-    > You must decode that : output = output.decode() ==> output = output.decode("cp949")
+    * You must decode that : output = output.decode() ==> output = output.decode("cp949")
 2. This Project used Camelot Library
 
 
@@ -75,18 +74,18 @@ output = output.decode("cp949") 로 바꾸어주면, 한글 폴더명이 포함�
 **Cropped Table JPG (Lattice Method)**
 
 
-***table 1***
+- ***table 1***
 ![sample-page-2-lattice-crop-3 pdf](https://user-images.githubusercontent.com/25974226/110661046-843e7600-8207-11eb-9568-3583734da546.jpg)
-***table 2***
+- ***table 2***
 ![sample-page-2-lattice-crop-4 pdf](https://user-images.githubusercontent.com/25974226/110661033-8274b280-8207-11eb-8b31-4a739346fa2e.jpg)
 
 
 **Cropped Table JPG (Stream Method)**
 
 
-***table 1 (Failed to detect table)***
+- ***table 1 (Failed to detect table)***
 ![sample-page-2-stream-crop-1 pdf](https://user-images.githubusercontent.com/25974226/110661038-83a5df80-8207-11eb-8fd3-46ecdf33c034.jpg)
-***table 2***
+- ***table 2***
 ![sample-page-2-stream-crop-2 pdf](https://user-images.githubusercontent.com/25974226/110661043-843e7600-8207-11eb-95a5-f7921abb72a6.jpg)
 
 
