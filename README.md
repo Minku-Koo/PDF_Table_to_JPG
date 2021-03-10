@@ -13,11 +13,13 @@
 
 * Create Date : 19/Nov/2020
 
+* Update Date : 11/Mar/2021
+
 * Author : Minkuk Koo
 
 * E-Mail : corleone@kakao.com
 
-* Version : 1.0.0
+* Version : 1.2.0
 
 * Keyword : 'PDF', 'Table', 'Camelot' ,'PDF Extract', 'PYPDF', 'pdf2jpg'
 
@@ -46,11 +48,11 @@ output 변수를 따로 decoding 해주어야 합니다.
 
 기존 output = output.decode() 으로 되어있는 부분을
 
-output = output.decode("cp949") 로 바꾸어주면 한글 폴더명이 포함되어도 해결됩니다.
+output = output.decode("cp949") 로 바꾸어주면, 한글 폴더명이 포함되어도 해결됩니다.
 
 
 ***Warning***
-1. 이 프로젝트는 excalibur를 활용하여 제작되었습니다.
+1. 이 프로젝트는 Camelot를 활용하여 제작되었습니다.
 2. Camelot이 테이블을 추출하는 것이 100% 정확하지 않습니다.
 3. Stream 방식의 경우, Table이 온전히 Crop되지 않습니다. 테이블의 일부가 잘려나갈 수 있습니다.
 
