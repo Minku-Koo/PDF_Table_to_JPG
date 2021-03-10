@@ -15,7 +15,7 @@
 
 * Update Date : 11/Mar/2021
 
-* Author : Minkuk Koo
+* Author : Minku Koo
 
 * E-Mail : corleone@kakao.com
 
